@@ -1,0 +1,37 @@
+openapi: 3.1.0
+info:
+  version: 0.0.1
+  title: Partsone バックエンド研修課題
+  description: デモアプリのAPI設計書
+servers:
+  - url: http://localhost/api
+    description: ローカル環境
+    variables: {}
+
+paths:
+  /comments:
+    get:
+      summary: コメント一覧取得
+      description: 全てのコメントを新しい順に取得します。
+      responses:
+        '200':
+          description: コメント一覧を正常に取得しました
+    post:
+      summary: コメントを投稿
+      description: 新しいコメントと評価を作成します。
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                content:
+                  type: string
+                  example: "これは良い記事ですね！"
+                rating:
+                  type: integer
+                  example: 5
+      responses:
+        '201':
+          description: コメントが正常に作成されました
