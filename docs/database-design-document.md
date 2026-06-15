@@ -24,8 +24,8 @@
 | id | bigserial | PRIMARY KEY | コメントID |
 | article_id | bigint | FOREIGN KEY | 対象の記事ID (`articles.id` に紐付け) |
 | user_id | bigint | FOREIGN KEY | 投稿者のユーザーID (`users.id` に紐付け) |
-| content | varchar(100) | NOT NULL | コメント内容（10文字〜100文字） |
-| rating | int | NULL許容 (Nullable) | 評価スコア（1〜5段階） |
+| content | varchar(100) | NOT NULL, CHECK (CHAR_LENGTH(content) >= 10) | コメント内容（10文字〜100文字） |
+| rating | int | NULL許容, CHECK (rating >= 1 AND rating <= 5) | 評価スコア（1〜5段階） |
 | created_at | timestamp | | 作成日時 |
 | updated_at | timestamp | | 更新日時 |
 
