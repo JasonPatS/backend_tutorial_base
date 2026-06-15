@@ -10,3 +10,5 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/comments', [CommentController::class, 'index']);
 Route::post('/comments', [CommentController::class, 'store']);
+Route::delete('/comments/{comment}', [CommentController::class, 'destroy']);
+Route::put('/comments/{comment}', [CommentController::class, 'update']);

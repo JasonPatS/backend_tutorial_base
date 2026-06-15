@@ -64,7 +64,25 @@ class CommentController extends Controller
      */
     public function update(Request $request, Comment $comment)
     {
-        //
+        $validated = $request->validate([
+            'content' => 'required|string|min:10|max:100',
+            'rating' => 'nullable|integer|min:1|max:5',
+        ], [
+            'content.required' => '何か入力してください。',
+            'content.min' => '最小文字数: 10',
+            'content.max' => '最大文字数: 100',
+
+            'rating.integer' => '数字(1-5)で入力してください。',
+            'rating.min' => '最小の数: 1',
+            'rating.max' => '最大の数: 5',
+        ]);
+
+        $comment->update($validated);
+
+        return response()->json([
+            'message' => 'コメントが正常に更新されました',
+            'data'    => $comment
+        ], 200);
     }
 
     /**
@@ -72,6 +90,10 @@ class CommentController extends Controller
      */
     public function destroy(Comment $comment)
     {
-        //
+        $comment->delete();
+
+        return response()->json([
+            'message' => 'コメントが正常に削除されました'
+        ], 200);
     }
 }

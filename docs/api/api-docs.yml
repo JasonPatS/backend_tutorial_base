@@ -35,3 +35,50 @@ paths:
       responses:
         '201':
           description: コメントが正常に作成されました
+
+  /comments/{comment}:
+    put:
+      summary: コメントの更新
+      description: 指定されたIDのコメント内容や評価を更新します。
+      parameters:
+        - name: comment
+          in: path
+          required: true
+          description: 更新するコメントのID
+          schema:
+            type: integer
+            example: 5
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                content:
+                  type: string
+                  example: "コメントの内容を少し修正しました。"
+                rating:
+                  type: integer
+                  example: 5
+      responses:
+        '200':
+          description: コメントが正常に更新されました
+        '404':
+          description: コメントが見つかりません
+    delete:
+      summary: コメントの削除
+      description: 指定されたIDのコメントを削除します。
+      parameters:
+        - name: comment
+          in: path
+          required: true
+          description: 削除するコメントのID
+          schema:
+            type: integer
+            example: 5
+      responses:
+        '200':
+          description: コメントが正常に削除されました
+        '404':
+          description: コメントが見つかりません
